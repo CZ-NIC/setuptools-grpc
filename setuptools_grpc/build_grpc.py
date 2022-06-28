@@ -42,7 +42,7 @@ class build_grpc(Command):
             ])
         self.proto_files = proto_files
 
-        for fileglob in (v for v in listify_value(self.proto_files, '\n') if v):
+        for fileglob in (v for v in listify_value(self.grpc_files, '\n') if v):
             grpc_files.extend([
                 filename[len(self.proto_path)+1:]
                 for filename in glob(os.path.join(self.proto_path, fileglob), recursive=True)
