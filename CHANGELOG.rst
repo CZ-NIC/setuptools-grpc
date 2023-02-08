@@ -8,6 +8,7 @@ ChangeLog
 Unreleased
 ----------
 
+* Add generation of .pyi files.
 
 0.2 (2022-06-28)
 ----------------
