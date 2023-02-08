@@ -59,7 +59,7 @@ class build_grpc(Command):
         for proto_file in self.proto_files:
             log.info('generating %s → %s', proto_file, py_module_name(proto_file))
         if protoc_main(
-            args + ['--python_out', self.output_path]
+            args + ['--python_out', self.output_path, '--pyi_out', self.output_path]
             + [os.path.join(self.proto_path, proto_file) for proto_file in self.proto_files]
         ):
             raise RuntimeError('grpc_build failed')
