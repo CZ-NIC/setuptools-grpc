@@ -8,6 +8,11 @@ ChangeLog
 Unreleased
 ----------
 
+0.4 (2023-02-08)
+----------------
+
+* Fix missing dependency constraint for grpcio-tools.
+
 0.3 (2023-02-08)
 ----------------
 
