@@ -41,8 +41,8 @@ def listify_value(arg, split=None):
 
 
 def py_module_name(file):
-    return "%s_pb2.py" % file.rpartition('.')[0]
+    return "%s_pb2.py" % file.rpartition(".")[0]
 
 
 def grpc_py_module_name(file):
-    return "%s_pb2_grpc.py" % file.rpartition('.')[0]
+    return "%s_pb2_grpc.py" % file.rpartition(".")[0]
