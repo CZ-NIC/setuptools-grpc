@@ -40,14 +40,14 @@ Command ``build_grpc`` provides following options:
 Example
 -------
 
-.. code-block::
+.. code-block:: toml
 
    # pyproject.toml
    [build-system]
    requires = ["setuptools", "setuptools-grpc"]
    build-backend = "setuptools.build_meta"
 
-.. code-block::
+.. code-block:: python
 
    # setup.py
    from distutils.command.build import build
@@ -60,7 +60,7 @@ Example
 
    setup(cmdclass={'build': custom_build})
 
-.. code-block::
+.. code-block:: ini
 
    # setup.cfg
    [build_grpc]
