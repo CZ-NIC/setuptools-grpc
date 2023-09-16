@@ -1,0 +1,10 @@
+[build-system]
+requires = ["setuptools", "setuptools_grpc"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "example"
+version = "0"
+
+[tool.setuptools]
+packages = ["example"]
