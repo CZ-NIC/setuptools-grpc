@@ -41,6 +41,19 @@ def test_finalize_options_not_empty(tmpdir):
     assert cmd.grpc_files == ["services/service_grpc.proto"]
 
 
+def test_finalize_options_trailing_slashes(tmpdir):
+    cmd = build_grpc(Distribution())
+    cmd.initialize_options()
+    cmd.proto_files = "**/*.proto"
+    cmd.grpc_files = "**/*_grpc.proto"
+    cmd.proto_path = tmpdir.path + "/src/"
+    cmd.output_path = tmpdir.path + "/dest/"
+    cmd.finalize_options()
+
+    assert cmd.proto_files == ["module1.proto", "module2.proto", "services/service_grpc.proto"]
+    assert cmd.grpc_files == ["services/service_grpc.proto"]
+
+
 def test_run(tmpdir):
     with patch("setuptools_grpc.build_grpc.protoc_main", autospec=True) as mock:
         cmd = build_grpc(Distribution())

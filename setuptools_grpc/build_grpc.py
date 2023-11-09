@@ -2,6 +2,7 @@
 import os
 from distutils import log
 from glob import glob
+from pathlib import Path
 
 import pkg_resources
 from grpc_tools.protoc import main as protoc_main
@@ -38,7 +39,7 @@ class build_grpc(Command):
         for fileglob in (v for v in listify_value(self.proto_files, "\n") if v):
             proto_files.extend(
                 [
-                    filename[len(self.proto_path) + 1 :]
+                    str(Path(filename).relative_to(self.proto_path))
                     for filename in glob(os.path.join(self.proto_path, fileglob), recursive=True)
                 ]
             )
@@ -47,7 +48,7 @@ class build_grpc(Command):
         for fileglob in (v for v in listify_value(self.grpc_files, "\n") if v):
             grpc_files.extend(
                 [
-                    filename[len(self.proto_path) + 1 :]
+                    str(Path(filename).relative_to(self.proto_path))
                     for filename in glob(os.path.join(self.proto_path, fileglob), recursive=True)
                 ]
             )
