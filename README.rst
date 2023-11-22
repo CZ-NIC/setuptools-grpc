@@ -14,7 +14,7 @@ setuptools-grpc
    :target: https://pypi.org/project/setuptools-grpc/
    :alt: PyPI - Python Version
 
-.. image:: https://img.shields.io/github/actions/workflow/status/CZ-NIC/setuptools-grpc/quality.yml
+.. image:: https://img.shields.io/github/actions/workflow/status/CZ-NIC/setuptools-grpc/test.yml
    :target: https://github.com/CZ-NIC/setuptools-grpc/
    :alt: GitHub Workflow Status (with event)
 
