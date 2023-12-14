@@ -8,6 +8,14 @@ ChangeLog
 Unreleased
 ----------
 
+0.5 (2023-12-14)
+----------------
+
+* Support Python versions 3.8, 3.9, 3.10, 3.11 and 3.12.
+* Fix tailing slash issues with proto files glob discovery (#9).
+* Add basic tests (#11).
+* Improve documentation.
+
 0.4 (2023-02-08)
 ----------------
 
