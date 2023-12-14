@@ -43,7 +43,7 @@ class build_grpc(Command):
                     for filename in glob(os.path.join(self.proto_path, fileglob), recursive=True)
                 ]
             )
-        self.proto_files = proto_files
+        self.proto_files = sorted(proto_files)
 
         for fileglob in (v for v in listify_value(self.grpc_files, "\n") if v):
             grpc_files.extend(
@@ -52,7 +52,7 @@ class build_grpc(Command):
                     for filename in glob(os.path.join(self.proto_path, fileglob), recursive=True)
                 ]
             )
-        self.grpc_files = grpc_files
+        self.grpc_files = sorted(grpc_files)
 
     def run(self):
         includes = (self.proto_path, pkg_resources.resource_filename("grpc_tools", "_proto"))
