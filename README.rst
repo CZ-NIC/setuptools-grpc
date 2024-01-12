@@ -53,12 +53,12 @@ Options
 Command ``build_grpc`` provides following options:
 
 * ``proto_files``: Newline separated list of glob patterns matching protobuf files to be compiled.
-  Paths are relative to the current directory.
+  Paths are relative to ``proto_path``.
   ``**`` can be used to match any files and zero or more directories.
   Default value is empty list.
 
 * ``grpc_files``: Newline separated list of glob patterns matching grpc service files to be compiled.
-  Paths are relative to the current directory.
+  Paths are relative to ``proto_path``.
   ``**`` can be used to match any files and zero or more directories.
   Default value is empty list.
 
@@ -112,7 +112,7 @@ otherwise ``setuptools_grpc`` won't do anything.
 
    # file: setup.cfg
    [build_grpc]
-   proto_files = src/**/*.proto
-   grpc_files = src/**/*_grpc.proto
+   proto_files = **/*.proto
+   grpc_files = **/*_grpc.proto
    proto_path = ./src
    output_path = ./out
