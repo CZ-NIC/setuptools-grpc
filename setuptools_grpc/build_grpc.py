@@ -61,23 +61,28 @@ class build_grpc(Command):
         args.extend("-I%s" % x for x in includes)
 
         # Generate protobuf modules
-        log.info("building protos")
-        for proto_file in self.proto_files:
-            log.info("generating %s → %s", proto_file, py_module_name(proto_file))
-        if protoc_main(
-            args
-            + ["--python_out", self.output_path, "--pyi_out", self.output_path]
-            + [os.path.join(self.proto_path, proto_file) for proto_file in self.proto_files]
-        ):
-            raise RuntimeError("grpc_build failed")
+        if self.proto_files:
+            log.info("building protos")
+            for proto_file in self.proto_files:
+                log.info("generating %s → %s", proto_file, py_module_name(proto_file))
+
+            protoc_args = (
+                args
+                + ["--python_out", self.output_path, "--pyi_out", self.output_path]
+                + [os.path.join(self.proto_path, proto_file) for proto_file in self.proto_files]
+            )
+            if protoc_main(protoc_args):
+                raise RuntimeError("grpc_build failed")
 
         # Generate grpc modules
-        log.info("building grpc")
-        for grpc_file in self.grpc_files:
-            log.info("generating %s → %s", grpc_file, grpc_py_module_name(grpc_file))
-        if protoc_main(
-            args
-            + ["--grpc_python_out", self.output_path]
-            + [os.path.join(self.proto_path, grpc_file) for grpc_file in self.grpc_files]
-        ):
-            raise RuntimeError("grpc_build failed")
+        if self.grpc_files:
+            log.info("building grpc")
+            for grpc_file in self.grpc_files:
+                log.info("generating %s → %s", grpc_file, grpc_py_module_name(grpc_file))
+            grpc_protoc_args = (
+                args
+                + ["--grpc_python_out", self.output_path]
+                + [os.path.join(self.proto_path, grpc_file) for grpc_file in self.grpc_files]
+            )
+            if protoc_main(grpc_protoc_args):
+                raise RuntimeError("grpc_build failed")
