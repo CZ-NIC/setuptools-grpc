@@ -76,7 +76,7 @@ Configuration
 
 You have to specify ``setuptools-grpc`` as part of build backend requirements.
 This follows specification introduced in `PEP 518 <https://peps.python.org/pep-0518/>`_.
-You can read more about it in `setuptools docs <https://setuptools.pypa.io/en/latest/build_meta.html>`_.
+You can read more about it in `setuptools docs <https://setuptools.pypa.io/en/latest/build_meta.html>`__.
 
 .. code-block:: toml
 
@@ -100,7 +100,7 @@ otherwise ``setuptools_grpc`` won't do anything.
    proto_path = ./src
    output_path = ./out
 
-It's also recommended to add generated files to your ``MANIFEST.in``. Otherwise they might be missing from the built wheel. See `setuptools docs <https://setuptools.pypa.io/en/latest/userguide/miscellaneous.html#controlling-files-in-the-distribution>`_ for more details about how files are included in the distribution.
+It's also recommended to add generated files to your ``MANIFEST.in``. Otherwise they might be missing from the built wheel. See `setuptools docs <https://setuptools.pypa.io/en/latest/userguide/miscellaneous.html#controlling-files-in-the-distribution>`__ for more details about how files are included in the distribution.
 
 .. code-block::
 

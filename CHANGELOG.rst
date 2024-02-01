@@ -8,6 +8,14 @@ ChangeLog
 Unreleased
 ----------
 
+1.0.0b1 (2024-02-01)
+--------------------
+
+* Inject ``build_grpc`` as ``build`` subcommand (#7).
+  * This means that you should no longer modify the ``build`` command in your ``setup.py``.
+  ``build_grpc`` is automatically injected as first subcommand of ``build``.
+* Use ruff instead of flake8, isort and black.
+
 0.5 (2023-12-14)
 ----------------
 

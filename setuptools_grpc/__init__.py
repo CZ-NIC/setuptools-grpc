@@ -2,7 +2,7 @@
 
 from setuptools import Command, Distribution
 
-__version__ = "0.5"
+__version__ = "1.0.0b1"
 
 
 def has_grpc(build: Command) -> bool:
