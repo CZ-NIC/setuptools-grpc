@@ -85,24 +85,7 @@ You can read more about it in `setuptools docs <https://setuptools.pypa.io/en/la
    requires = ["setuptools", "setuptools-grpc"]
    build-backend = "setuptools.build_meta"
 
-Next, you need to actually add ``build_grpc`` as subcommand of the ``build`` command.
-This needs to be done in ``setup.py``, but if ``setuptools`` ever allows for declarative
-config, we'll be happy to support it.
-
-.. code-block:: python
-
-   # file: setup.py
-   from setuptools import setup
-   from setuptools.command.build import build
-
-   class custom_build(build):
-       sub_commands = [
-           ('build_grpc', None),
-       ] + build.sub_commands
-
-   setup(cmdclass={'build': custom_build})
-
-Finally, you need to configure ``setuptools_grpc`` itself.
+Next, you need to configure ``setuptools_grpc`` itself.
 This can be done in ``setup.py``, but we recommend declarative config in ``setup.cfg``.
 Depending on your project structure, you may not need some of the options below.
 You'll always need to specify at least ``proto_files`` or ``grpc_files``,
@@ -116,3 +99,10 @@ otherwise ``setuptools_grpc`` won't do anything.
    grpc_files = **/*_grpc.proto
    proto_path = ./src
    output_path = ./out
+
+It's also recommended to add generated files to your ``MANIFEST.in``. Otherwise they might be missing from the built wheel. See `setuptools docs <https://setuptools.pypa.io/en/latest/userguide/miscellaneous.html#controlling-files-in-the-distribution>`_ for more details about how files are included in the distribution.
+
+.. code-block::
+
+   # file: MANIFEST.in
+   graft out
