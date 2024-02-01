@@ -2,5 +2,23 @@
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
-[tool.black]
+[tool.ruff]
+target-version = "py38"
 line-length = 99
+select = ["E4", "E7", "E9", "F", "W", "C90", "I", "D", "S"]
+ignore = ["D105", "D106", "D107"]
+
+[tool.ruff.per-file-ignores]
+"tests/*" = ["D1", "S101", "S105", "S106", "S107"]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.pycodestyle]
+max-doc-length = 120
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"

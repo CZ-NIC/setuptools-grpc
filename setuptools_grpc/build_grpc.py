@@ -26,12 +26,17 @@ class build_grpc(Command):
     ]
 
     def initialize_options(self):
+        """Initialize command options."""
         self.proto_files = []
         self.grpc_files = []
         self.proto_path = "."
         self.output_path = "."
 
     def finalize_options(self):
+        """Finalize command options.
+
+        Expand globs to finalize protobuf and grpc file lists.
+        """
         self.ensure_dirname("proto_path")
         self.ensure_dirname("output_path")
 
@@ -56,6 +61,10 @@ class build_grpc(Command):
         self.grpc_files = sorted(grpc_files)
 
     def run(self):
+        """Run command.
+
+        Call `protoc` command to compile protobuf and grpc source files to python modules.
+        """
         includes = (self.proto_path, pkg_resources.resource_filename("grpc_tools", "_proto"))
         args = ["__main__"]
         args.extend("-I%s" % x for x in includes)

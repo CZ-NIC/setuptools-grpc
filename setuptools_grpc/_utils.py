@@ -3,8 +3,8 @@
 
 # Taken from https://github.com/python-babel/babel/blob/master/babel/messages/frontend.py
 def listify_value(arg, split=None):
-    """
-    Make a list out of an argument.
+    """Make a list out of an argument.
+
     Values from `distutils` argument parsing are always single strings;
     values from `optparse` parsing may be lists of strings that may need
     to be further split.
@@ -36,7 +36,7 @@ def listify_value(arg, split=None):
             out.extend(listify_value(val, split=split))
             continue
         out.extend(s.strip() for s in str(val).split(split))
-    assert all(isinstance(val, str) for val in out)
+    assert all(isinstance(val, str) for val in out)  # noqa: S101
     return out
 
 
