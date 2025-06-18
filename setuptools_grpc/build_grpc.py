@@ -5,7 +5,6 @@ from distutils import log
 from glob import glob
 from pathlib import Path
 
-import pkg_resources
 from grpc_tools.protoc import main as protoc_main
 from setuptools import Command
 
@@ -65,9 +64,7 @@ class build_grpc(Command):
 
         Call `protoc` command to compile protobuf and grpc source files to python modules.
         """
-        includes = (self.proto_path, pkg_resources.resource_filename("grpc_tools", "_proto"))
-        args = ["__main__"]
-        args.extend("-I%s" % x for x in includes)
+        args = ["__main__", "-I{}".format(self.proto_path)]
 
         # Generate protobuf modules
         if self.proto_files:
