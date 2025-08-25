@@ -1,4 +1,4 @@
-from unittest.mock import ANY, call, patch
+from unittest.mock import call, patch
 
 import pytest
 from setuptools import Distribution
@@ -72,7 +72,6 @@ def test_run(tmpdir):
                 [
                     "__main__",
                     "-I" + tmpdir.path + "/src",
-                    ANY,
                     "--python_out",
                     tmpdir.path + "/dest",
                     "--pyi_out",
@@ -86,7 +85,6 @@ def test_run(tmpdir):
                 [
                     "__main__",
                     "-I" + tmpdir.path + "/src",
-                    ANY,
                     "--grpc_python_out",
                     tmpdir.path + "/dest",
                     tmpdir.path + "/src/services/service_grpc.proto",
