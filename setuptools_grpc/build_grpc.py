@@ -1,14 +1,16 @@
 """Plugin for setuptools providing python gRPC modules build."""
 
+import importlib.resources
 import os
 from distutils import log
 from glob import glob
 from pathlib import Path
 
+import grpc_tools
 from grpc_tools.protoc import main as protoc_main
 from setuptools import Command
 
-from ._utils import get_resource_file_name, grpc_py_module_name, listify_value, py_module_name
+from ._utils import grpc_py_module_name, listify_value, py_module_name
 
 __all__ = ["build_grpc"]
 
@@ -65,8 +67,9 @@ class build_grpc(Command):
         Call `protoc` command to compile protobuf and grpc source files to python modules.
         """
         # Include grpc_tools._proto dir
-        proto_include = get_resource_file_name("grpc_tools", "_proto")
-        args = ["-I{}".format(proto_include), "-I{}".format(self.proto_path)]
+        with importlib.resources.path(grpc_tools, "_proto") as proto_path:
+            # NOTE: Argument __main__ serves as sys.argv placeholder. Do not remove it!
+            args = ["__main__", "-I{}".format(proto_path), "-I{}".format(self.proto_path)]
 
         # Generate protobuf modules
         if self.proto_files:

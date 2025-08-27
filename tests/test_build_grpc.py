@@ -72,6 +72,7 @@ def test_run(tmpdir):
         assert mock.mock_calls == [
             call(
                 [
+                    "__main__",
                     "-I" + str(Path(grpc_tools.__file__).parent / "_proto"),
                     "-I" + tmpdir.path + "/src",
                     "--python_out",
@@ -85,6 +86,7 @@ def test_run(tmpdir):
             ),
             call(
                 [
+                    "__main__",
                     "-I" + str(Path(grpc_tools.__file__).parent / "_proto"),
                     "-I" + tmpdir.path + "/src",
                     "--grpc_python_out",
