@@ -67,9 +67,9 @@ class build_grpc(Command):
         Call `protoc` command to compile protobuf and grpc source files to python modules.
         """
         # Include grpc_tools._proto dir
-        with importlib.resources.path(grpc_tools, "_proto") as proto_path:
-            # NOTE: Argument __main__ serves as sys.argv placeholder. Do not remove it!
-            args = ["__main__", "-I{}".format(proto_path), "-I{}".format(self.proto_path)]
+        proto_path = (importlib.resources.files(grpc_tools) / "_proto").resolve()
+        # NOTE: Argument __main__ serves as sys.argv placeholder. Do not remove it!
+        args = ["__main__", "-I{}".format(proto_path), "-I{}".format(self.proto_path)]
 
         # Generate protobuf modules
         if self.proto_files:
