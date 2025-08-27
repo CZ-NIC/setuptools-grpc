@@ -1,5 +1,12 @@
 """Setuptools grpc utils."""
 
+import sys
+
+if sys.version_info >= (3, 9, 0):
+    from importlib import resources
+else:
+    import pkg_resources
+
 
 # Taken from https://github.com/python-babel/babel/blob/master/babel/messages/frontend.py
 def listify_value(arg, split=None):
@@ -46,3 +53,13 @@ def py_module_name(file):
 
 def grpc_py_module_name(file):
     return "%s_pb2_grpc.py" % file.rpartition(".")[0]
+
+
+def get_resource_file_name(package_or_requirement: str, resource_name: str) -> str:
+    """Obtain the filename for a resource on the file system."""
+    file_name = None
+    if sys.version_info >= (3, 9, 0):
+        file_name = (resources.files(package_or_requirement) / resource_name).resolve()
+    else:
+        file_name = pkg_resources.resource_filename(package_or_requirement, resource_name)
+    return str(file_name)

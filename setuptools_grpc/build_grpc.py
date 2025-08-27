@@ -8,7 +8,7 @@ from pathlib import Path
 from grpc_tools.protoc import main as protoc_main
 from setuptools import Command
 
-from ._utils import grpc_py_module_name, listify_value, py_module_name
+from ._utils import get_resource_file_name, grpc_py_module_name, listify_value, py_module_name
 
 __all__ = ["build_grpc"]
 
@@ -64,7 +64,9 @@ class build_grpc(Command):
 
         Call `protoc` command to compile protobuf and grpc source files to python modules.
         """
-        args = ["__main__", "-I{}".format(self.proto_path)]
+        # Include grpc_tools._proto dir
+        proto_include = get_resource_file_name("grpc_tools", "_proto")
+        args = ["-I{}".format(proto_include), "-I{}".format(self.proto_path)]
 
         # Generate protobuf modules
         if self.proto_files:
