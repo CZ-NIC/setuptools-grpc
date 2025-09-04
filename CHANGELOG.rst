@@ -8,6 +8,13 @@ ChangeLog
 Unreleased
 ----------
 
+1.0.0b2 (2025-09-04)
+--------------------
+
+* Add build backend for customizing build dependencies
+* Drop ``pkg_resources``
+* Update supported python versions: 3.9, 3.10, 3.11, 3.12 and 3.13
+
 1.0.0b1 (2024-02-01)
 --------------------
 
