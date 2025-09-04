@@ -106,3 +106,35 @@ It's also recommended to add generated files to your ``MANIFEST.in``. Otherwise 
 
    # file: MANIFEST.in
    graft out
+
+------------------------------
+Restricting build dependencies
+------------------------------
+
+Generated gRPC Python modules have a restriction:
+You should ideally run the code with the same version of ``protobuf`` that was used to build the package.
+To complicate matters even further, ``grpcio-tools`` bundles its own version of ``protobuf`` and although
+it does depend on ``protobuf`` package, it doesn't actually use it to generate the Python modules.
+
+There's a possible solution: Don't generate the gRPC Python modules until you know which version of
+``protobuf`` will be used to run it.
+If you have a separate package for gRPC API, you can publish the ``sdist``, but not the wheel.
+Wheel will be built when you install the ``sdist`` and you can specify the ``grpcio-tools`` version used to build it.
+To this end, ``setuptools-grpc`` offers ``setuptools_grpc.build_backend``.
+When you use this build backend, env variable ``SETUPTOOLS_GRPC_BUILD_DEPS`` will be considered and all
+of the specified dependencies will be used as additional build dependencies.
+You can specify multiple dependency restrictions separated by whitespace (don't use any whitespaces otherwise!).
+
+.. code-block:: toml
+
+   # file: pyproject.toml
+   [build-system]
+   requires = ["setuptools-grpc"]
+   build-backend = "setuptools_grpc.build_backend"
+
+.. code-block:: sh
+
+   SETUPTOOLS_GRPC_BUILD_DEPS="grpcio-tools==1.74.0" pip install "my-grpc-api-package" "protobuf==4.31.1"
+
+If you ensure that the specified ``protobuf`` version matches the version bundled in ``grpcio-tools``,
+you'll run the code with the exaclty same ``protobuf`` version that was used to build it.
