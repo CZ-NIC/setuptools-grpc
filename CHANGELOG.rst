@@ -8,6 +8,18 @@ ChangeLog
 Unreleased
 ----------
 
+
+1.0.0 (2025-09-25)
+--------------------
+
+* Inject ``build_grpc`` as ``build`` subcommand (#7).
+  * This means that you should no longer modify the ``build`` command in your ``setup.py``.
+  ``build_grpc`` is automatically injected as first subcommand of ``build``.
+* Add build backend for customizing build dependencies (#20).
+* Drop ``pkg_resources`` (#24).
+* Update supported python versions: 3.9, 3.10, 3.11, 3.12 and 3.13
+* Use ruff instead of flake8, isort and black.
+
 1.0.0b2 (2025-09-04)
 --------------------
 
