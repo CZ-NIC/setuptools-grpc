@@ -1,0 +1,3 @@
+graft simple_example
+include pyproject.toml
+global-exclude __pycache__/*
