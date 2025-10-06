@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools-grpc >= 1"]
+build-backend = "setuptools_grpc.build_backend"
+
+[project]
+name = "simple-example"
+version = "0.0.1"
+dependencies = [
+    "grpcio",
+    "protobuf",
+]
+
+[tool.setuptools.packages.find]
+
+[project.scripts]
+tea-server = "simple_example.tea:serve"

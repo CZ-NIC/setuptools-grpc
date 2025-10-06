@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+message TeaRequest {
+    string color = 1;
+}
+
+message TeaResponse {
+    int64 temperature = 1;
+}
+
+service TeaService {
+    rpc make_tea (TeaRequest) returns (TeaResponse) {}
+}
